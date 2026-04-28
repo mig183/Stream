@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix</title>
+
+    <link rel="stylesheet" href="templatemo-parallax-starter.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: #141414;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            color: #e50914;
+        }
+
+        #search {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), #0f0f0f),
+                        url('https://statics.lacoope.net/2021/09/crop/a76a434bc6b00ac4c42dbc66c664af52__900x520.webp') center/cover;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .movies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .movie {
+            background: #1c1c1c;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .movie.hidden {
+            display: none;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .movie h3 {
+            padding: 10px;
+            margin: 0;
+        }
+
+        .movie button {
+            margin: 10px;
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: none;
+            background: #e50914;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .movie button:hover {
+            background: #b20710;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #141414;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <h1>🎬 StreamFlix</h1>
+    <input type="text" id="search" placeholder="Buscar película...">
+</header>
+
+<section class="hero">
+    <h2>Películas ilimitadas, en cualquier momento</h2>
+    <p>Disfruta acción, comedia, terror y más</p>
+</section>
+
+<section class="movies" id="movieContainer">
+
+    <div class="movie" data-title="avatar">
+        <img src="https://image.tmdb.org/t/p/original/uWUz2PN5cywGEVa96vFVKQa0T5H.jpg">
+        <h3>Avatar</h3>
+        <button onclick="goToMovie('avatar')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="avatar el camino del agua">
+        <img src="https://image.tmdb.org/t/p/original/ckeTumMS4G31UQ9NNkmtW2QhfMF.jpg">
+        <h3>Avatar: El Camino del Agua</h3>
+        <button onclick="goToMovie('avatarelcaminodelagua')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="avatar fuego y ceniza">
+        <img src="https://image.tmdb.org/t/p/original/4n1U0Mwn7djux6VKNYDRWPgS2x6.jpg">
+        <h3>Avatar: Fuego y Ceniza</h3>
+        <button onclick="goToMovie('avatarfuegoyceniza')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="top gun">
+        <img src="https://image.tmdb.org/t/p/original/W8QUPhiBOCdj2urJDzc2D9xdQb.jpg">
+        <h3>Top Gun: Pasión y Gloria</h3>
+        <button onclick="goToMovie('topgun')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="top">
+        <img src="https://image.tmdb.org/t/p/original/AlWpEpQq0RgZIXVHAHZtFhEvRgd.jpg">
+        <h3>Top Gun: Maverick</h3>
+        <button onclick="goToMovie('top')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="f1">
+        <img src="https://score.procinal.com.co/mobilecomjson/imagenes/1319.jpg">
+        <h3>F1</h3>
+        <button onclick="goToMovie('f1')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo">
+        <img src="https://image.tmdb.org/t/p/original/9rpdhn7p7mDZW2rUXsINf9c6sR5.jpg">
+        <h3>La Era de Hielo</h3>
+        <button onclick="goToMovie('laeradehielo')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo 2">
+        <img src="https://image.tmdb.org/t/p/original/wnBEdWq5gplaAgTmYFg4cq89mWi.jpg">
+        <h3>La era de Hielo 2</h3>
+        <button onclick="goToMovie('laeradehielo2')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo 3">
+        <img src="https://image.tmdb.org/t/p/original/5OiDvlOXSyXB90pl4c3Qcl2w5yR.jpg">
+        <h3>La Era de Hielo 3</h3>
+        <button onclick="goToMovie('laeradehielo3')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo choque de mundos">
+        <img src="https://image.tmdb.org/t/p/original/rzaiM1C7oZm0nqVVfddZVZ8wAr1.jpg">
+        <h3>La Era de Hielo: Choque de Mundos</h3>
+        <button onclick="goToMovie('laeradehielochoquedemundos')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="la era de hielo las aventuras de buck">
+        <img src="https://image.tmdb.org/t/p/original/iJDPnoZ7IafVxrxq0qRUsoBINoR.jpg">
+        <h3>La Era de Hielo: Las Aventuras de Buck</h3>
+        <button onclick="goToMovie('laeradehielolasaventurasdebuck')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="goat la cabra que cambio el juego">
+        <img src="https://image.tmdb.org/t/p/original/2yblKPC6ZKEU6iv9sEZ0jktjiTU.jpg">
+        <h3>GOAT: La Cabra que Cambio el Juego</h3>
+        <button onclick="goToMovie('goatlacabraquecambioeljuego')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="super mario bros la pelicula">
+        <img src="https://image.tmdb.org/t/p/original/zNKs1T0VZuJiVuhuL5GSCNkGdxf.jpg">
+        <h3>Super Mario Bros. La Pelicula</h3>
+        <button onclick="goToMovie('supermariobroslapelicula')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="super mario galaxy la pelicula">
+        <img src="https://image.tmdb.org/t/p/original/79EVB4qhyfrdlMgT8GIRAikdzsQ.jpg">
+        <h3>Super Mario Galaxy La Pelicula</h3>
+        <button onclick="goToMovie('supermariogalaxylapelicula')">Ver ahora</button>
+    </div>
+
+
+</section>
+
+<footer>
+    <p>© 2026 Hecho por un estudiante desarrollador</p>
+</footer>
+
+<script>
+const searchInput = document.getElementById("search");
+
+searchInput.addEventListener("keyup", function() {
+    const value = this.value.toLowerCase();
+
+    const movies = document.querySelectorAll(".movie");
+
+    movies.forEach(movie => {
+        const title = (movie.getAttribute("data-title") || "").toLowerCase();
+        movie.classList.toggle("hidden", !title.includes(value));
+    });
+});
+
+function goToMovie(name) {
+    window.location.href = "movie.html?film=" + name.toLowerCase();
+}
+</script>
+
+<script src="templatemo-parallax-script.js"></script>
+
+</body>
+</html>

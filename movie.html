@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reproductor</title>
+</head>
+
+<body style="background:black; color:white; text-align:center;">
+
+<h1 id="title"></h1>
+
+<iframe id="video" width="80%" height="500" allowfullscreen></iframe>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const film = params.get("film")?.toLowerCase();
+
+const title = document.getElementById("title");
+const video = document.getElementById("video");
+
+// 🎬 BASE DE DATOS
+const movies = {
+    avatar: {
+        name: "Avatar",
+        video: "https://vimeus.com/e/movie?tmdb=19995&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    avatarelcaminodelagua: {
+        name: "Avatar: El Camino del Agua",
+        video: "https://www.youtube.com/embed/ysz5S6PUM-U"
+    },
+    avatarfuegoyceniza: {
+        name: "Avatar: Fuego y Ceniza",
+        video: "https://vimeus.com/e/movie?tmdb=83533&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    topgun: {
+        name: "Top Gun: Pasión y Gloria",
+        video: "https://vimeus.com/e/movie?tmdb=744&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    top: {
+        name: "Top Gun: Maverick",
+        video: "https://vimeus.com/e/movie?tmdb=361743&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    f1: {
+        name: "F1",
+        video: "https://vimeus.com/e/movie?tmdb=911430&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    laeradehielo: {
+        name: "La Era de Hielo",
+        video: "https://vimeus.com/e/movie?tmdb=425&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    laeradehielo2: {
+        name: "La Era de Hielo 2",
+        video: "https://vimeus.com/e/movie?tmdb=950&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    laeradehielo3: {
+        name: "La Era de Hielo 3",
+        video: "https://hgcloud.to/axkjf4qzah6h"
+
+    },
+    laeradehielochoquedemundos: {
+        name: "La Era de Hielo: Choque de Mundos",
+        video: "https://hgcloud.to/12jkhi505b9x"
+
+    },
+    laeradehielolasaventurasdebuck: {
+        name: "La Era de Hielo: Las Aventuras de Buck",
+        video: "https://vimeus.com/e/movie?tmdb=774825&view_key=Uuuiue53iGjAK4_nS7dcSl0BzuC7hnYJFn33uGjTN3M"
+
+    },
+    goatlacabraquecambioeljuego: {
+        name: "GOAT: La Cabra que Cambio el Juego",
+        video: "https://vimeus.com/e/movie?tmdb=1297842&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
+
+    },
+    supermariobroslapelicula: {
+        name: "Super Mario Bros. La Pelicula",
+        video: "https://vimeus.com/e/movie?tmdb=502356&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
+
+    },
+    supermariogalaxylapelicula: {
+        name: "Super Mario Galaxy La Pelicula",
+        video: "https://vimeus.com/e/movie?tmdb=1226863&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
+
+    },
+
+};
+
+// 🧠 VALIDACIONES
+if (!film) {
+    title.textContent = "⚠ No se seleccionó ninguna película";
+} 
+else if (!movies[film]) {
+    title.textContent = "❌ Película no encontrada";
+} 
+else {
+    title.textContent = movies[film].name;
+    video.src = movies[film].video;
+}
+</script>
+
+</body>
+</html>
