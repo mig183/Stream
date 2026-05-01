@@ -114,11 +114,11 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.6);
 }
 
-/* 🔹 PC NORMAL (NO TOCAR) */
+/* 🔥 ARREGLO AQUÍ */
 .movie-card img {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
+    height: auto;
+    display: block;
     cursor: pointer;
 }
 
@@ -196,26 +196,23 @@ body {
         font-size: 1.4rem;
     }
 
+    .movie-card img {
+        height: auto;
+    }
+
     .modal iframe {
         height: 250px;
     }
 }
 
-/* 🔥 SOLO MÓVILES → IMAGEN COMPLETA */
+/* 🔥 IMAGEN COMPLETA EN CELULAR */
 @media (max-width: 600px) {
-
-    .movie-card {
-        height: auto !important;
-    }
-
     .movie-card img {
         width: 100% !important;
         height: auto !important;
         object-fit: contain !important;
-        display: block;
         background: black;
     }
-
 }
 
 /* Móviles pequeños */
