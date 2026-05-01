@@ -2,247 +2,962 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>StreamUmber</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamumber - Plataforma de streaming</title>
+    <meta name="description" content="Streamumber es una plataforma de streaming donde puedes ver contenido online fácilmente.">
+
+    <meta name="keywords" content="streamumber, streaming, ver películas, series online">
+
+    <meta name="author" content="Streamumber">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="templatemo-parallax-starter.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: #141414;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            color: #e50914;
+        }
+
+        #search {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), #0f0f0f),
+                        url('https://statics.lacoope.net/2021/09/crop/a76a434bc6b00ac4c42dbc66c664af52__900x520.webp') center/cover;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .movies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .movie {
+            background: #1c1c1c;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .movie.hidden {
+            display: none;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .movie h3 {
+            padding: 10px;
+            margin: 0;
+        }
+
+        .movie button {
+            margin: 10px;
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: none;
+            background: #e50914;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .movie button:hover {
+            background: #b20710;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #141414;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
-<body style="background:black; color:white; text-align:center;">
+<body>
 
-<h1 id="title"></h1>
+<header class="navbar">
+    <h1>Streamumber</h1>
+<p>Plataforma de streaming online para ver películas y series</p>
+    <input type="text" id="search" placeholder="Buscar película...">
+</header>
 
-<iframe id="video" width="80%" height="500" allowfullscreen></iframe>
+<section class="hero">
+    <h2>Películas ilimitadas, en cualquier momento</h2>
+    <p>Disfruta acción, comedia, terror y más</p>
+</section>
+
+<section class="movies" id="movieContainer">
+
+    <div class="movie" data-title="michael">
+        <img src="https://image.tmdb.org/t/p/original/2uK36ujoDXOfNiJ5Yp3raVprB51.jpg">
+        <h3>Michael</h3>
+        <button onclick="goToMovie('michael')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="avatar">
+        <img src="https://image.tmdb.org/t/p/original/uWUz2PN5cywGEVa96vFVKQa0T5H.jpg">
+        <h3>Avatar</h3>
+        <button onclick="goToMovie('avatar')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="avatar el camino del agua">
+        <img src="https://image.tmdb.org/t/p/original/ckeTumMS4G31UQ9NNkmtW2QhfMF.jpg">
+        <h3>Avatar: El Camino del Agua</h3>
+        <button onclick="goToMovie('avatarelcaminodelagua')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="avatar fuego y ceniza">
+        <img src="https://image.tmdb.org/t/p/original/4n1U0Mwn7djux6VKNYDRWPgS2x6.jpg">
+        <h3>Avatar: Fuego y Ceniza</h3>
+        <button onclick="goToMovie('avatarfuegoyceniza')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="top gun pasión y gloria">
+        <img src="https://image.tmdb.org/t/p/original/W8QUPhiBOCdj2urJDzc2D9xdQb.jpg">
+        <h3>Top Gun: Pasión y Gloria</h3>
+        <button onclick="goToMovie('topgun')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="top gun maverick">
+        <img src="https://image.tmdb.org/t/p/original/AlWpEpQq0RgZIXVHAHZtFhEvRgd.jpg">
+        <h3>Top Gun: Maverick</h3>
+        <button onclick="goToMovie('top')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="f1">
+        <img src="https://score.procinal.com.co/mobilecomjson/imagenes/1319.jpg">
+        <h3>F1</h3>
+        <button onclick="goToMovie('f1')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo">
+        <img src="https://image.tmdb.org/t/p/original/9rpdhn7p7mDZW2rUXsINf9c6sR5.jpg">
+        <h3>La Era de Hielo</h3>
+        <button onclick="goToMovie('laeradehielo')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo 2">
+        <img src="https://image.tmdb.org/t/p/original/wnBEdWq5gplaAgTmYFg4cq89mWi.jpg">
+        <h3>La era de Hielo 2</h3>
+        <button onclick="goToMovie('laeradehielo2')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo 3">
+        <img src="https://image.tmdb.org/t/p/original/5OiDvlOXSyXB90pl4c3Qcl2w5yR.jpg">
+        <h3>La Era de Hielo 3</h3>
+        <button onclick="goToMovie('laeradehielo3')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo 4">
+        <img src="https://image.tmdb.org/t/p/original/qYiZOCXkOYtYfolUUdJKoZ8xPsL.jpg">
+        <h3>La Era de Hielo 4</h3>
+        <button onclick="goToMovie('laeradehielo4')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="la era de hielo choque de mundos">
+        <img src="https://image.tmdb.org/t/p/original/rzaiM1C7oZm0nqVVfddZVZ8wAr1.jpg">
+        <h3>La Era de Hielo: Choque de Mundos</h3>
+        <button onclick="goToMovie('laeradehielochoquedemundos')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="la era de hielo las aventuras de buck">
+        <img src="https://image.tmdb.org/t/p/original/iJDPnoZ7IafVxrxq0qRUsoBINoR.jpg">
+        <h3>La Era de Hielo: Las Aventuras de Buck</h3>
+        <button onclick="goToMovie('laeradehielolasaventurasdebuck')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="goat la cabra que cambio el juego">
+        <img src="https://image.tmdb.org/t/p/original/2yblKPC6ZKEU6iv9sEZ0jktjiTU.jpg">
+        <h3>GOAT: La Cabra que Cambio el Juego</h3>
+        <button onclick="goToMovie('goatlacabraquecambioeljuego')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="super mario bros la pelicula">
+        <img src="https://image.tmdb.org/t/p/original/zNKs1T0VZuJiVuhuL5GSCNkGdxf.jpg">
+        <h3>Super Mario Bros. La Pelicula</h3>
+        <button onclick="goToMovie('supermariobroslapelicula')">Ver ahora</button>
+    </div>
+
+    <div class="movie" data-title="super mario galaxy la pelicula">
+        <img src="https://image.tmdb.org/t/p/original/79EVB4qhyfrdlMgT8GIRAikdzsQ.jpg">
+        <h3>Super Mario Galaxy La Pelicula</h3>
+        <button onclick="goToMovie('supermariogalaxylapelicula')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="los tipos malos">
+        <img src="https://image.tmdb.org/t/p/original/czxHSOXyKd6zEvIOvUTxAwqOjcK.jpg">
+        <h3>Los Tipos Malos</h3>
+        <button onclick="goToMovie('lostiposmalos')">Ver ahora</button>
+    </div>
+
+<div class="movie" data-title="los tipos malos 2">
+        <img src="https://image.tmdb.org/t/p/original/j0moebdCWDjjwS6bz1ohrsRp1Vp.jpg">
+        <h3>Los Tipos Malos 2</h3>
+        <button onclick="goToMovie('lostiposmalos2')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="elio">
+        <img src="https://image.tmdb.org/t/p/original/fGjwHlv8bCjZypi2bHbbSmyIGMV.jpg">
+        <h3>Elio</h3>
+        <button onclick="goToMovie('elio')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="zoopocalipsis">
+        <img src="https://image.tmdb.org/t/p/original/49s9HB9bXMjHkdw0asNs7m1rO5E.jpg">
+        <h3>Zoopocalipsis</h3>
+        <button onclick="goToMovie('zoopocalipsis')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="chaman">
+        <img src="https://image.tmdb.org/t/p/original/ltLqm9f9Ma3iCFmfXNHenzPEqda.jpg">
+        <h3>Chamán</h3>
+        <button onclick="goToMovie('chaman')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="los ojos del mal">
+        <img src="https://image.tmdb.org/t/p/original/k3Br27Z0nFyCcAGi68p2D24Kf0a.jpg">
+        <h3>Los Ojos del Mal</h3>
+        <button onclick="goToMovie('losojosdelmal')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="los ojos del mal 2">
+        <img src="https://image.tmdb.org/t/p/original/jGLfL5zg5mt3GXtJtEsk7kqTP93.jpg">
+        <h3>Los Ojos del Mal 2</h3>
+        <button onclick="goToMovie('losojosdelmal2')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="los leones">
+        <img src="https://image.tmdb.org/t/p/original/4x18ruh7SdNaCIO85rw7j57So84.jpg">
+        <h3>Los Leones</h3>
+        <button onclick="goToMovie('losleones')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="la princesa kaguya del cosmos">
+        <img src="https://image.tmdb.org/t/p/original/vwFXqXh1LRxEYg94IyF8wAHsWOT.jpg">
+        <h3>La Princesa Kaguya del Cosmos</h3>
+        <button onclick="goToMovie('laprincesakaguyadelcosmos')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="ocho hombres">
+        <img src="https://image.tmdb.org/t/p/original/6yHZaLnMFKAJf3LeyEwcayUS04a.jpg">
+        <h3>Ocho Hombres</h3>
+        <button onclick="goToMovie('ochohombres')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="¡que duro es el amor!">
+        <img src="https://image.tmdb.org/t/p/original/nLvjIuGphJt46xwgGRPTofHp2lV.jpg">
+        <h3>¡Que Duro es el Amor!</h3>
+        <button onclick="goToMovie('queduroeselamor')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="arde mississippi">
+        <img src="https://image.tmdb.org/t/p/original/1NYRgNNb6YEEorUPFpK3lFU4Oik.jpg">
+        <h3>Arde mississippi</h3>
+        <button onclick="goToMovie('ardemississippi')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="las dos caras de enero">
+        <img src="https://image.tmdb.org/t/p/original/ucyQcFLeYGjVGrRikyw6qYLbWuy.jpg">
+        <h3>Las Dos Caras de Enero</h3>
+        <button onclick="goToMovie('lasdoscarasdeenero')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="albert">
+        <img src="https://image.tmdb.org/t/p/original/o4HESCTMx6OEm5qOKfWlu29B147.jpg">
+        <h3>Albert</h3>
+        <button onclick="goToMovie('albert')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="amar te duele">
+        <img src="https://image.tmdb.org/t/p/original/wK5UVMVjWMLV71SLpCjUFrO8mHI.jpg">
+        <h3>Amar te Duele</h3>
+        <button onclick="goToMovie('amarteduele')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="tom y jerry y el mago de oz">
+        <img src="https://image.tmdb.org/t/p/original/xDgFAfmJoAg86TGdJSBEelBHRmZ.jpg">
+        <h3>Tom y Jerry y El mago de Oz</h3>
+        <button onclick="goToMovie('tomyjerryyelmagodeoz')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="Relentless">
+        <img src="https://image.tmdb.org/t/p/original/30CJyWxLd7axNOdpuF9L0yAfKa9.jpg">
+        <h3>Relentless</h3>
+        <button onclick="goToMovie('relentless')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="the caretaker">
+        <img src="https://image.tmdb.org/t/p/original/e0ag1DlCPSCFL2taUj6pYrmEfWP.jpg">
+        <h3>The Caretaker</h3>
+        <button onclick="goToMovie('thecaretaker')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="pillion">
+        <img src="https://image.tmdb.org/t/p/original/7Pd6ChSQjSXy4snJiorSdzg2cG3.jpg">
+        <h3>Pillion</h3>
+        <button onclick="goToMovie('pillion')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="god's soldier">
+        <img src="https://image.tmdb.org/t/p/original/aRMUOfpHj7vXDoKEpScgnfk0nv6.jpg">
+        <h3>God's Soldier</h3>
+        <button onclick="goToMovie('godssoldier')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="maquina de guerra">
+        <img src="https://image.tmdb.org/t/p/original/rFhKkXhk7ClU03jQ5rHIApJDwev.jpg">
+        <h3>Máquina de Guerra</h3>
+        <button onclick="goToMovie('maquinadeguerra')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="kung fu panda">
+        <img src="https://image.tmdb.org/t/p/original/wzOERnvuM3c2mbAvCu5pw1QIaZX.jpg">
+        <h3>Kung Fu Panda</h3>
+        <button onclick="goToMovie('kungfupanda')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="kung fu panda 2">
+        <img src="https://image.tmdb.org/t/p/original/5JsMPU79GmY9dKBahXxq6OefPmN.jpg">
+        <h3>Fung Fu Panda 2</h3>
+        <button onclick="goToMovie('kungfupanda2')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="kung fu panda 3">
+        <img src="https://image.tmdb.org/t/p/original/uxc0zzIZuq3rh7hJvYNCWTJAkBd.jpg">
+        <h3>Kung Fu Panda 3</h3>
+        <button onclick="goToMovie('kungfupanda3')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="kung fu panda 4">
+        <img src="https://image.tmdb.org/t/p/original/yUAyBYAWI7oZJwi3K5pjiPO7azm.jpg">
+        <h3>Kung Fu Panda 4</h3>
+        <button onclick="goToMovie('kungfupanda4')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="seduced by a streager">
+        <img src="https://image.tmdb.org/t/p/original/pqnsqwO8rzSGz5pmqqsr03qGiX8.jpg">
+        <h3>Seduced by a Streager</h3>
+        <button onclick="goToMovie('seducedbyastreager')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="una pareja dispareja">
+        <img src="https://image.tmdb.org/t/p/original/7pdyFaA3E8VfqOcKnhYPdIDrvGA.jpg">
+        <h3>Una Pareja Dispareja</h3>
+        <button onclick="goToMovie('unaparejadispareja')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="m*a*s*h">
+        <img src="https://fanpelis.to/wp-content/uploads/thumbs/55743cc0393b1cb4b8b37d09ae48d097_hd.webp">
+        <h3>M*A*S*H</h3>
+        <button onclick="goToMovie('mash')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="lovelace: garganta profunda">
+        <img src="https://image.tmdb.org/t/p/original/dqCMTdiMLhEc3vpmyDb1pTAjMDS.jpg">
+        <h3>Lovelace: Garganta Profunda</h3>
+        <button onclick="goToMovie('lovelacegargantaprofunda')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="juego de asesinos">
+        <img src="https://image.tmdb.org/t/p/original/daWolaS3RNGcOwy8dxndNFvyIrl.jpg">
+        <h3>Juego de Asesinos</h3>
+        <button onclick="goToMovie('juegodeasesinos')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="los croods">
+        <img src="https://image.tmdb.org/t/p/original/3X3qtBTgKt5mCB30RJwbIjgjzdw.jpg">
+        <h3>Los Croods</h3>
+        <button onclick="goToMovie('loscroods')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="los croods 2">
+        <img src="https://image.tmdb.org/t/p/original/5uMWKEmegf5aTJnp1u98JF4QerP.jpg">
+        <h3>Los Croods 2</h3>
+        <button onclick="goToMovie('loscroods2')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="tiger: tanque de guerra">
+        <img src="https://image.tmdb.org/t/p/original/7EW6Ag7OxR7no8jmOHgpijKoTy1.jpg">
+        <h3>Tiger: Tanque de Guerra</h3>
+        <button onclick="goToMovie('tigertanquedeguerra')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="anaconda 2025">
+        <img src="https://image.tmdb.org/t/p/original/zX1KJPiGTrzpFcjfOWlmqdRgpQd.jpg">
+        <h3>Anaconda (2025)</h3>
+        <button onclick="goToMovie('anaconda2025')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="anaconda">
+        <img src="https://image.tmdb.org/t/p/original/uj0ZYr2ZvAFT0uPuBdaLb9yYZQv.jpg">
+        <h3>Anaconda</h3>
+        <button onclick="goToMovie('anaconda')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="anaconda 2 en busca de la orquídea sangrienta">
+        <img src="https://image.tmdb.org/t/p/original/ph64l6cJSfSiQwIKK9JbzQpWBy3.jpg">
+        <h3>Anaconda 2:</h3> <h3/>En Busca de la Orquídea Sangrienta</h3>
+        <button onclick="goToMovie('anaconda2Enbuscadelaorquídeasangrienta')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="anaconda 3 la amenaza">
+        <img src="https://image.tmdb.org/t/p/original/k1aLFB41uY7prZsslYX556dlDp5.jpg">
+        <h3>Anaconda 3: La Amenaza</h3>
+        <button onclick="goToMovie('anaconda3laamenaza')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="anaconda 4 rastro de sangre">
+        <img src="https://image.tmdb.org/t/p/original/pxhih2VLhYoqUzNO459RhZtKBfl.jpg">
+        <h3>Anaconda 4: Rastro de Sangre</h3>
+        <button onclick="goToMovie('anaconda4rastrodesangre')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+<div class="movie" data-title="">
+        <img src="">
+        <h3></h3>
+        <button onclick="goToMovie('')">Ver ahora</button>
+    </div>
+
+
+</section>
+
+<footer>
+    <p>© 2026 Hecho por un estudiante desarrollador<p/>                     
+
+<p>Si no esta tu pelicula contactame</p>
+</footer>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const film = params.get("film")?.toLowerCase();
+const searchInput = document.getElementById("search");
 
-const title = document.getElementById("title");
-const video = document.getElementById("video");
+searchInput.addEventListener("keyup", function() {
+    const value = this.value.toLowerCase();
 
-// 🎬 BASE DE DATOS
-const movies = {
-    avatar: {
-        name: "Avatar",
-        video: "https://vimeus.com/e/movie?tmdb=19995&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    avatarelcaminodelagua: {
-        name: "Avatar: El Camino del Agua",
-        video: "https://vimeus.com/e/movie?tmdb=76600&view_key=9lZ9H0whZSXmlqikD8bHrth_8ere1M9oTMT9w0gTp4U"
-    },
-    avatarfuegoyceniza: {
-        name: "Avatar: Fuego y Ceniza",
-        video: "https://vimeus.com/e/movie?tmdb=83533&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    topgun: {
-        name: "Top Gun: Pasión y Gloria",
-        video: "https://vimeus.com/e/movie?tmdb=744&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    top: {
-        name: "Top Gun: Maverick",
-        video: "https://vimeus.com/e/movie?tmdb=361743&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    f1: {
-        name: "F1",
-        video: "https://vimeus.com/e/movie?tmdb=911430&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    laeradehielo: {
-        name: "La Era de Hielo",
-        video: "https://vimeus.com/e/movie?tmdb=425&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    laeradehielo2: {
-        name: "La Era de Hielo 2",
-        video: "https://vimeus.com/e/movie?tmdb=950&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
-    },
-    laeradehielo3: {
-        name: "La Era de Hielo 3",
-        video: "https://vimeos.net/embed-zvdiseyr8cmn.html"
-    },
-    laeradehielo4: {
-        name: "La Era de Hielo 4",
-        video: "https://vimeos.net/embed-o6bisgihhw0x.html"
+    const movies = document.querySelectorAll(".movie");
 
+    movies.forEach(movie => {
+        const title = (movie.getAttribute("data-title") || "").toLowerCase();
+        movie.classList.toggle("hidden", !title.includes(value));
+    });
+});
 
-    },
-    laeradehielochoquedemundos: {
-        name: "La Era de Hielo: Choque de Mundos",
-        video: "https://hgcloud.to/e/12jkhi505b9x"
-
-    },
-    laeradehielolasaventurasdebuck: {
-        name: "La Era de Hielo: Las Aventuras de Buck",
-        video: "https://vimeus.com/e/movie?tmdb=774825&view_key=Uuuiue53iGjAK4_nS7dcSl0BzuC7hnYJFn33uGjTN3M"
-
-    },
-    goatlacabraquecambioeljuego: {
-        name: "GOAT: La Cabra que Cambio el Juego",
-        video: "https://vimeus.com/e/movie?tmdb=1297842&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
-
-    },
-    supermariobroslapelicula: {
-        name: "Super Mario Bros. La Pelicula",
-        video: "https://vimeus.com/e/movie?tmdb=502356&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
-
-    },
-    supermariogalaxylapelicula: {
-        name: "Super Mario Galaxy La Pelicula",
-        video: "https://vimeus.com/e/movie?tmdb=1226863&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
-
-    },
-    lostiposmalos: {
-        name: "Los Tipos Malos",
-        video: "https://vimeus.com/e/movie?tmdb=629542&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    lostiposmalos2: {
-        name: "Los Tipos Malos 2",
-        video: "https://vimeus.com/e/movie?tmdb=1175942&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    elio: {
-        name: "Elio",
-        video: "https://vimeus.com/e/movie?tmdb=1022787&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    zoopocalipsis: {
-        name: "Zoopocalipsis",
-        video: "https://vimeus.com/e/movie?tmdb=1205229&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    chaman: {
-        name: "Chamán",
-        video: "https://vimeus.com/e/movie?tmdb=1339166&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    losojosdelmal: {
-        name: "Los Ojos del Mal",
-        video: "https://vimeus.com/e/movie?tmdb=10007&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    losojosdelmal2: {
-        name: "Los Ojos del Mal 2",
-        video: "https://vimeus.com/e/movie?tmdb=226140&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    losleones: {
-        name: "Los Leones",
-        video: "https://vimeus.com/e/movie?tmdb=666751&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    laprincesakaguyadelcosmos: {
-        name: "La Princesa Kaguya del Cosmos",
-        video: "https://vimeus.com/e/movie?tmdb=1575337&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    ochohombres: {
-        name: "Ocho Hombres",
-        video: "https://vimeus.com/e/movie?tmdb=13554&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    queduroeselamor: {
-        name: "¡Que Duro es el Amor!",
-        video: "https://vimeus.com/e/movie?tmdb=734265&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    ardemississippi: {
-        name: "Arde Mississipi",
-        video: "https://vimeus.com/e/movie?tmdb=1632&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    lasdoscarasdeenero: {
-        name: "Las Dos Caras de Enero",
-        video: "https://vimeus.com/e/movie?tmdb=192149&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    albert: {
-        name: "Albert",
-        video: "https://vimeus.com/e/movie?tmdb=429657&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    amarteduele: {
-        name: "Amar te Duele",
-        video: "https://vimeus.com/e/movie?tmdb=51822&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    tomyjerryyelmagodeoz: {
-        name: "Tom y Jerry y El mago de Oz",
-        video: "https://vimeus.com/e/movie?tmdb=72972&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    relentless: {
-        name: "Relentless",
-        video: "https://vimeus.com/e/movie?tmdb=1459276&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    thecaretaker: {
-        name: "The Caretaker",
-        video: "https://vimeus.com/e/movie?tmdb=1584478&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    pillion: {
-        name: "Pillion",
-        video: "https://vimeus.com/e/movie?tmdb=1287141&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    godssoldier: {
-        name: "God's Soldier",
-        video: "https://vimeus.com/e/movie?tmdb=1314440&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
-
-    },
-    maquinadeguerra: {
-        name: "Máquina de Guerra",
-        video: "https://vimeos.net/embed-gu0ui9l378lj.html"
-
-    },
-    kungfupanda: {
-         name: "Kung Fu Panda",
-         video: "https://vimeus.com/e/movie?tmdb=9502&view_key=YXeDJZjDoj0LukP2ieJUWFJIP5kbkrI_0LqqSj3z2EQ"
-    },
-    kungfupanda2: {
-         name: "Kung Fu Panda 2",
-         video: "https://vimeus.com/e/movie?tmdb=49444&view_key=YXeDJZjDoj0LukP2ieJUWFJIP5kbkrI_0LqqSj3z2EQ"
-    },
-    kungfupanda3: {
-         name: "Kung Fu Panda 3",
-         video: "https://vimeus.com/e/movie?tmdb=140300&view_key=3JXTGx_Wq_nTnUCW7w_lfXgAgGbwi036BUDmEf1Av34"
-    },
-    kungfupanda4: {
-         name: "Kung Fu Panda 4",
-         video: "https://vimeus.com/e/movie?tmdb=1011985&view_key=3JXTGx_Wq_nTnUCW7w_lfXgAgGbwi036BUDmEf1Av34"
-    },
-    seducedbyastreager: {
-         name: "Seduced by a Streager",
-         video: "https://vimeus.com/e/movie?tmdb=461813&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
-    },
-    unaparejadispareja: {
-         name: "Una Pareja Dispareja",
-         video: "https://vimeus.com/e/movie?tmdb=8952&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
-    },
-    mash: {
-         name: "M*A*S*H",
-         video: "https://vimeos.net/embed-ig1086bz8ncw.html"
-    },
-    lovelacegargantaprofunda: {
-         name: "Lovelace: Garganta Profunda",
-         video: "https://vimeus.com/e/movie?tmdb=77805&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
-    },
-    juegodeasesinos: {
-         name: "Juego de Asesinos",
-         video: "https://vimeus.com/e/movie?tmdb=71677&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
-    }
-
-};
-
-if (!film) {
-    title.textContent = "⚠ Película no encontrada";
-}
-if (!film || !movies[film]) {
-    title.textContent = "⚠ Película no encontrada";
-}
-
-else {
-    title.textContent = movies[film].name;
-    video.src = movies[film].video;
+function goToMovie(name) {
+    window.location.href = "movie.html?film=" + name.toLowerCase();
 }
 </script>
+
+<script src="templatemo-parallax-script.js"></script>
 
 </body>
 </html>
