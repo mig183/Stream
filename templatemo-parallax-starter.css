@@ -100,11 +100,9 @@ body {
     display: none;
 }
 
-.movie-card {
-    min-width: 150px;
-}
 /* CARDS */
 .movie-card {
+    min-width: 150px;
     background: var(--card);
     border-radius: 10px;
     overflow: hidden;
@@ -182,7 +180,7 @@ body {
 /* Tablets */
 @media (max-width: 1024px) {
     .row-container {
-        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
 }
 
@@ -197,10 +195,6 @@ body {
         font-size: 1.4rem;
     }
 
-    .row-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .movie-card img {
         height: 180px;
     }
@@ -210,23 +204,24 @@ body {
     }
 }
 
+/* 🔥 SOLUCIÓN REAL (IMAGEN COMPLETA EN CELULAR) */
+@media (max-width: 600px) {
+    .movie-card img {
+        height: auto !important;
+        width: 100% !important;
+        object-fit: contain !important;
+        background: black;
+    }
+}
+
 /* Móviles pequeños */
 @media (max-width: 480px) {
-    .row-container {
-        grid-template-columns: 1fr;
-    }
-
     .navbar input {
         width: 100%;
     }
 }
 
-@media (max-width: 600px) {
-    .movie img {
-        height: auto;
-        object-fit: contain;
-    }
-}
+/* ocultar buscador */
 .movie-card.hidden {
     display: none;
 }
