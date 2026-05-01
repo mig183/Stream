@@ -221,6 +221,12 @@ body {
     }
 }
 
+@media (max-width: 600px) {
+    .movie img {
+        height: auto;
+        object-fit: contain;
+    }
+}
 .movie-card.hidden {
     display: none;
 }
