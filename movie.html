@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reproductor</title>
+    <title>StreamUmber</title>
 </head>
 
 <body style="background:black; color:white; text-align:center;">
@@ -26,7 +26,7 @@ const movies = {
     },
     avatarelcaminodelagua: {
         name: "Avatar: El Camino del Agua",
-        video: "https://www.youtube.com/embed/ysz5S6PUM-U"
+        video: "https://vimeus.com/e/movie?tmdb=76600&view_key=9lZ9H0whZSXmlqikD8bHrth_8ere1M9oTMT9w0gTp4U"
     },
     avatarfuegoyceniza: {
         name: "Avatar: Fuego y Ceniza",
@@ -54,7 +54,12 @@ const movies = {
     },
     laeradehielo3: {
         name: "La Era de Hielo 3",
-        video: "https://hgcloud.to/e/axkjf4qzah6h"
+        video: "https://vimeos.net/embed-zvdiseyr8cmn.html"
+    },
+    laeradehielo4: {
+        name: "La Era de Hielo 4",
+        video: "https://vimeos.net/embed-o6bisgihhw0x.html"
+
 
     },
     laeradehielochoquedemundos: {
@@ -180,17 +185,59 @@ const movies = {
     godssoldier: {
         name: "God's Soldier",
         video: "https://vimeus.com/e/movie?tmdb=1314440&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    maquinadeguerra: {
+        name: "Máquina de Guerra",
+        video: "https://vimeos.net/embed-gu0ui9l378lj.html"
+
+    },
+    kungfupanda: {
+         name: "Kung Fu Panda",
+         video: "https://vimeus.com/e/movie?tmdb=9502&view_key=YXeDJZjDoj0LukP2ieJUWFJIP5kbkrI_0LqqSj3z2EQ"
+    },
+    kungfupanda2: {
+         name: "Kung Fu Panda 2",
+         video: "https://vimeus.com/e/movie?tmdb=49444&view_key=YXeDJZjDoj0LukP2ieJUWFJIP5kbkrI_0LqqSj3z2EQ"
+    },
+    kungfupanda3: {
+         name: "Kung Fu Panda 3",
+         video: "https://vimeus.com/e/movie?tmdb=140300&view_key=3JXTGx_Wq_nTnUCW7w_lfXgAgGbwi036BUDmEf1Av34"
+    },
+    kungfupanda4: {
+         name: "Kung Fu Panda 4",
+         video: "https://vimeus.com/e/movie?tmdb=1011985&view_key=3JXTGx_Wq_nTnUCW7w_lfXgAgGbwi036BUDmEf1Av34"
+    },
+    seducedbyastreager: {
+         name: "Seduced by a Streager",
+         video: "https://vimeus.com/e/movie?tmdb=461813&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    unaparejadispareja: {
+         name: "Una Pareja Dispareja",
+         video: "https://vimeus.com/e/movie?tmdb=8952&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    mash: {
+         name: "M*A*S*H",
+         video: "https://vimeos.net/embed-ig1086bz8ncw.html"
+    },
+    lovelacegargantaprofunda: {
+         name: "Lovelace: Garganta Profunda",
+         video: "https://vimeus.com/e/movie?tmdb=77805&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    juegodeasesinos: {
+         name: "Juego de Asesinos",
+         video: "https://vimeus.com/e/movie?tmdb=71677&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
     }
 
 };
 
-// 🧠 VALIDACIONES
 if (!film) {
-    title.textContent = "⚠ No se seleccionó ninguna película";
-} 
-else if (!movies[film]) {
-    title.textContent = "❌ Película no encontrada";
-} 
+    title.textContent = "⚠ Película no encontrada";
+}
+if (!film || !movies[film]) {
+    title.textContent = "⚠ Película no encontrada";
+}
+
 else {
     title.textContent = movies[film].name;
     video.src = movies[film].video;
