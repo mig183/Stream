@@ -16,7 +16,6 @@ body {
 /* ===== NAVBAR ===== */
 .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     background: #141414;
@@ -25,7 +24,12 @@ body {
     z-index: 1000;
     position: relative;
 }
-
+/* BOTÓN A LA DERECHA */
+.menu-toggle {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
 .navbar h1 {
     margin: 0;
     color: #e50914;
@@ -165,8 +169,25 @@ footer {
 <header class="navbar"> 
     <h1>Streamumber</h1>
     <p>Plataforma de streaming online para ver películas y series</p>
-</header>
 
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+<div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">✖</span>
+
+    <h2>Menú</h2>
+
+    <a href="#">🏠 Inicio</a>
+    <a href="#">🔥 Tendencias</a>
+    <a href="#">🎬 Películas</a>
+    <a href="#">📺 Series</a>
+
+    <hr>
+
+    <h3>Cuenta</h3>
+    <a href="#">🔐 Iniciar sesión</a>
+    <a href="#">📝 Registrarse</a>
+</div>
 <section class="hero">
     <h2>Películas ilimitadas, en cualquier momento</h2>
     <p>Disfruta acción, comedia, terror y más</p>
@@ -1007,6 +1028,9 @@ footer {
 </footer>
 
 <script>
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("active");
+}
 const searchInput = document.getElementById("search");
 
 searchInput.addEventListener("keyup", function() {
@@ -1032,6 +1056,56 @@ function goToMovie(name) {
 </a>
 
 <style>
+/* BOTÓN HAMBURGUESA */
+.menu-toggle {
+    position: absolute;
+    right: 20px;   /* 👈 lo pega a la derecha */
+    top: 15px;
+
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 260px;
+    height: 100%;
+    background: #141414;
+    padding: 20px;
+    transition: 0.3s;
+    z-index: 2000;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar h2, .sidebar h3 {
+    margin-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    color: #e50914;
+}
+
+.close-btn {
+    font-size: 22px;
+    cursor: pointer;
+    float: right;
+}
+
 .telegram-float {
   position: fixed;
   bottom: 20px;
