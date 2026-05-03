@@ -1,131 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streamumber | Películas y series online</title>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <meta name="description" content="Streamumber es una plataforma de streaming donde puedes ver películas y series online de forma fácil y rápida.">
-    <meta name="author" content="Streamumber">
-    <meta name="format-detection" content="telephone=no">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streamumber | Películas y series online</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f0f0f;
-            color: #fff;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+}
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: #141414;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #141414;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    position: relative;
+}
 
-        .navbar h1 {
-            margin: 0;
-            color: #e50914;
-        }
+.navbar h1 {
+    margin: 0;
+    color: #e50914;
+}
 
-        #search {
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-            width: 200px;
-        }
+/* TEXTO CENTRADO EN PC */
+.navbar p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
 
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), #0f0f0f),
-                        url('https://statics.lacoope.net/2021/09/crop/a76a434bc6b00ac4c42dbc66c664af52__900x520.webp') center/cover;
-        }
+/* ===== HERO ===== */
+.hero {
+    text-align: center;
+    padding: 100px 20px 80px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), #0f0f0f),
+                url('https://statics.lacoope.net/2021/09/crop/a76a434bc6b00ac4c42dbc66c664af52__900x520.webp') center/cover;
+}
 
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
 
-        .movies {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 40px;
-        }
+/* ===== BUSCADOR (ARREGLADO) ===== */
+.hero-search {
+    margin-top: 20px;
+    padding: 12px 18px;
+    width: 320px;
+    max-width: 90%;
+    
+    border-radius: 30px;
+    border: 2px solid transparent;
 
-        .movie {
-            background: #1c1c1c;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    background: rgba(255,255,255,0.08);
+    color: #fff;
 
-        .movie.hidden {
-            display: none;
-        }
+    outline: none;
+    font-size: 0.95rem;
 
-        .movie:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
 
-        .movie img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
+/* placeholder */
+.hero-search::placeholder {
+    color: rgba(255,255,255,0.6);
+}
 
-        .movie h3 {
-            padding: 10px;
-            margin: 0;
-        }
+/* efecto focus */
+.hero-search:focus {
+    border: 2px solid #e50914;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 10px rgba(229,9,20,0.5);
+    width: 360px;
+}
 
-        .movie button {
-            margin: 10px;
-            padding: 10px;
-            width: calc(100% - 20px);
-            border: none;
-            background: #e50914;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+/* ===== GRID ===== */
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
 
-        .movie button:hover {
-            background: #b20710;
-        }
+.movie {
+    background: #1c1c1c;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #141414;
-            margin-top: 20px;
-        }
-    </style>
+.movie.hidden {
+    display: none;
+}
+
+.movie:hover {
+    transform: scale(1.05);
+}
+
+.movie img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.movie h3 {
+    padding: 10px;
+    margin: 0;
+}
+
+.movie button {
+    margin: 10px;
+    padding: 10px;
+    width: calc(100% - 20px);
+    border: none;
+    background: #e50914;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #141414;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .navbar p {
+        position: static;
+        transform: none;
+        white-space: normal;
+    }
+
+    .hero-search {
+        width: 100%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<header class="navbar">
+<header class="navbar"> 
     <h1>Streamumber</h1>
-<p></p>
-    <input type="text" id="search" placeholder="Buscar película...">
+    <p>Plataforma de streaming online para ver películas y series</p>
 </header>
 
 <section class="hero">
     <h2>Películas ilimitadas, en cualquier momento</h2>
     <p>Disfruta acción, comedia, terror y más</p>
+
+    <!-- BUSCADOR -->
+    <input type="text" id="search" placeholder="Buscar película..." class="hero-search">
 </section>
 
 <section class="movies" id="movieContainer">
 
-    <div class="movie" data-title="michael">
+   <div class="movie" data-title="michael">
         <img src="https://image.tmdb.org/t/p/original/2uK36ujoDXOfNiJ5Yp3raVprB51.jpg">
         <h3>Michael</h3>
         <button onclick="goToMovie('michael')">Ver ahora</button>
