@@ -10,13 +10,9 @@ const banner = document.getElementById("banner");
 const bannerTitle = document.getElementById("banner-title");
 const bannerDesc = document.getElementById("banner-desc");
 
-// 🎬 modal trailer
-const trailerModal = document.getElementById("modal");
+const modal = document.getElementById("modal");
 const video = document.getElementById("video");
-const closeTrailer = document.getElementById("close");
-
-// 🔐 modal login
-const authModal = document.getElementById("authModal");
+const closeBtn = document.getElementById("close");
 
 let isLogin = true;
 let bannerSet = false;
@@ -38,34 +34,27 @@ function updateUI() {
 
 // ================= LOGOUT =================
 function logout() {
-    localStorage.clear();
+    localStorage.removeItem("logged");
+    localStorage.removeItem("currentUser");
+
     alert("Sesión cerrada");
     location.reload();
 }
 
-// ================= MODAL LOGIN =================
+// ================= MODAL =================
 function toggleModal() {
-    if (authModal.style.display === "block") {
-        authModal.style.display = "none";
-    } else {
-        authModal.style.display = "block";
-
-        // 👇 siempre abre en login
-        isLogin = true;
-
-        document.getElementById("modalTitle").textContent = "Iniciar Sesión";
-        document.querySelector(".modal-content button").textContent = "Entrar";
-
-        document.getElementById("switchText").innerHTML =
-            '¿No tienes cuenta? <span onclick="switchMode()">Regístrate</span>';
-    }
+    const modal = document.getElementById("authModal");
+    modal.style.display = modal.style.display === "block" ? "none" : "block";
 }
 
 // abrir registro directo
-function openRegister() {
-    authModal.style.display = "block";
 
-    isLogin = false;
+function openRegister() {
+    const modal = document.getElementById("authModal");
+
+    modal.style.display = "block";
+
+    isLogin = false; // 👈 IMPORTANTE (modo registro)
 
     document.getElementById("modalTitle").textContent = "Registrarse";
     document.querySelector(".modal-content button").textContent = "Crear cuenta";
@@ -103,6 +92,7 @@ function login() {
     }
 
     if (isLogin) {
+        // LOGIN
         const savedUser = localStorage.getItem("user");
         const savedPass = localStorage.getItem("pass");
 
@@ -118,6 +108,7 @@ function login() {
         }
 
     } else {
+        // REGISTRO
         localStorage.setItem("user", user);
         localStorage.setItem("pass", pass);
         localStorage.setItem("avatar", avatarInput || "https://i.imgur.com/1X6Yb6G.png");
@@ -144,6 +135,7 @@ async function getMovies(url, container) {
 
                 const img = document.createElement("img");
                 img.src = IMG + movie.poster_path;
+                img.loading = "lazy";
 
                 const title = document.createElement("p");
                 title.textContent = movie.title;
@@ -155,7 +147,8 @@ async function getMovies(url, container) {
                     window.location.href = `movie.html?id=${movie.id}`;
                 };
 
-                img.ondblclick = () => openTrailer(movie.id);
+                // doble click = trailer
+                img.ondblclick = () => openModal(movie.id);
 
                 card.appendChild(img);
                 card.appendChild(title);
@@ -164,45 +157,54 @@ async function getMovies(url, container) {
                 container.appendChild(card);
             });
 
+        // banner solo una vez
+        if (!bannerSet && data.results.length > 0) {
+            const random = data.results[Math.floor(Math.random() * data.results.length)];
+
+            if (random.backdrop_path) {
+                banner.style.backgroundImage = `url(${IMG + random.backdrop_path})`;
+            }
+
+            bannerTitle.textContent = random.title;
+            bannerDesc.textContent = random.overview || "Sin descripción";
+            bannerSet = true;
+        }
+
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error cargando películas:", error);
     }
 }
 
 // ================= TRAILER =================
-async function openTrailer(id) {
+async function openModal(id) {
     try {
         const res = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`);
         const data = await res.json();
 
-        const trailer = data.results.find(v => v.type === "Trailer");
+        const trailer = data.results.find(v => v.type === "Trailer" && v.site === "YouTube");
 
         if (trailer) {
-            video.src = `https://www.youtube.com/embed/${trailer.key}`;
-            trailerModal.style.display = "flex";
+            video.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1`;
+            modal.style.display = "flex";
         } else {
-            alert("No hay trailer");
+            alert("No hay trailer disponible");
         }
 
     } catch (error) {
-        console.error(error);
+        console.error("Error cargando trailer:", error);
     }
 }
 
-// cerrar trailer
-closeTrailer.onclick = () => {
-    trailerModal.style.display = "none";
+// cerrar modal
+closeBtn.onclick = () => {
+    modal.style.display = "none";
     video.src = "";
 };
 
-// ================= CERRAR MODALES =================
+// cerrar haciendo click afuera
 window.onclick = (e) => {
-    if (e.target === authModal) {
-        authModal.style.display = "none";
-    }
-
-    if (e.target === trailerModal) {
-        trailerModal.style.display = "none";
+    if (e.target === modal) {
+        modal.style.display = "none";
         video.src = "";
     }
 };
@@ -217,25 +219,47 @@ document.getElementById("search").addEventListener("keyup", function() {
         const query = this.value.trim();
 
         if (query.length > 2) {
-            const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`);
-            const data = await res.json();
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+                const data = await res.json();
 
-            trendingContainer.innerHTML = "";
+                trendingContainer.innerHTML = "";
 
-            data.results.forEach(movie => {
-                const div = document.createElement("div");
-                div.innerHTML = `
-                    <img src="${IMG + movie.poster_path}">
-                    <p>${movie.title}</p>
-                `;
-                trendingContainer.appendChild(div);
-            });
+                data.results
+                    .filter(movie => movie.poster_path)
+                    .forEach(movie => {
+
+                        const card = document.createElement("div");
+                        card.classList.add("movie-card");
+
+                        const img = document.createElement("img");
+                        img.src = IMG + movie.poster_path;
+
+                        const title = document.createElement("p");
+                        title.textContent = movie.title;
+
+                        const btn = document.createElement("button");
+                        btn.textContent = "Ver ahora";
+                        btn.onclick = () => {
+                            window.location.href = `movie.html?id=${movie.id}`;
+                        };
+
+                        card.appendChild(img);
+                        card.appendChild(title);
+                        card.appendChild(btn);
+
+                        trendingContainer.appendChild(card);
+                    });
+
+            } catch (error) {
+                console.error("Error en búsqueda:", error);
+            }
         }
     }, 400);
 });
 
 // ================= INIT =================
-window.onload = () => {
+window.onload = function() {
     updateUI();
 
     getMovies(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`, trendingContainer);
