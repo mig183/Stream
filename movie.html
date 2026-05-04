@@ -1,16 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>StreamUmber</title>
-    <link rel="icon" href="favicon.png" type="image/png">
+<meta charset="UTF-8">
+<title>StreamUmber</title>
+<link rel="icon" href="favicon.png">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #0f0f0f, #000);
+    color: white;
+}
+
+/* BOTÓN VOLVER */
+.back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+}
+
+.back:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* CONTENEDOR */
+.player-container {
+    max-width: 1000px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 20px;
+}
+
+/* TÍTULO */
+#title {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* VIDEO */
+.video-box {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+/* IFRAME */
+iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+
+/* LOADER */
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px){
+    iframe {
+        height: 250px;
+    }
+}
+</style>
 </head>
 
-<body style="background:black; color:white; text-align:center;">
+<body>
 
-<h1 id="title"></h1>
+<button class="back" onclick="history.back()">⬅ Volver</button>
 
-<iframe id="video" width="80%" height="500" allowfullscreen></iframe>
+<div class="player-container">
+    <h1 id="title"></h1>
+
+    <div class="video-box">
+        <div class="loader" id="loader">⏳ Cargando...</div>
+        <iframe id="video" allowfullscreen></iframe>
+    </div>
+</div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
@@ -18,8 +103,8 @@ const film = params.get("film")?.toLowerCase();
 
 const title = document.getElementById("title");
 const video = document.getElementById("video");
+const loader = document.getElementById("loader");
 
-// 🎬 BASE DE DATOS
 const movies = {
         michael: {
         name: "Michael",
@@ -262,7 +347,7 @@ const movies = {
          name: "Anaconda",
          video: "https://vimeus.com/e/movie?tmdb=9360&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
      },
-    anaconda2Enbuscadelaorquídeasangrienta: {
+    anaconda2Enbuscadelaorquideasangrienta: {
          name: "Anaconda 2: En busca de la orquídea sangrienta",
          video: "https://vimeus.com/e/movie?tmdb=14863&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
      },
@@ -337,21 +422,609 @@ const movies = {
     piratasdelcaribe5lavenganzadesalazar: {
          name: "Piratas del Caribe 5: La Venganza de Salazar",
          video: "https://vimeos.net/embed-n6f6a6d5hq4q.html"
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
+     },
+    e: {
+         name: "",
+         video: ""
    }
 
 };
 
-if (!film) {
-    title.textContent = "⚠ Película no encontrada";
-}
 if (!film || !movies[film]) {
-    title.textContent = "⚠ Película no encontrada";
-}
-
-else {
+    title.innerHTML = "❌ Película no encontrada";
+    document.querySelector(".video-box").style.display = "none";
+} else {
     title.textContent = movies[film].name;
     video.src = movies[film].video;
 }
+
+video.onload = () => {
+    loader.style.display = "none";
+};
 </script>
 
 </body>
