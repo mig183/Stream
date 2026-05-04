@@ -80,6 +80,7 @@ iframe {
     iframe {
         height: 250px;
     }
+
 }
 </style>
 </head>
@@ -1024,6 +1025,9 @@ if (!film || !movies[film]) {
 
 video.onload = () => {
     loader.style.display = "none";
+if (video.requestFullscreen) {
+        video.requestFullscreen();
+ }
 };
 </script>
 
