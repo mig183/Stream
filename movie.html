@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>StreamUmber</title>
-    <link rel="icon" href="favicon.png" type="image/png">
 <meta charset="UTF-8">
 <title>StreamUmber</title>
 <link rel="icon" href="favicon.png">
@@ -87,16 +84,13 @@ iframe {
 </style>
 </head>
 
-<body style="background:black; color:white; text-align:center;">
 <body>
 
 <button class="back" onclick="history.back()">⬅ Volver</button>
 
-<h1 id="title"></h1>
 <div class="player-container">
     <h1 id="title"></h1>
 
-<iframe id="video" width="80%" height="500" allowfullscreen></iframe>
     <div class="video-box">
         <div class="loader" id="loader">⏳ Cargando...</div>
         <iframe id="video" allowfullscreen></iframe>
@@ -111,20 +105,320 @@ const title = document.getElementById("title");
 const video = document.getElementById("video");
 const loader = document.getElementById("loader");
 
-// 🎬 BASE DE DATOS
 const movies = {
         michael: {
         name: "Michael",
-@@ -262,7 +347,7 @@ <h1 id="title"></h1>
+        video: "https://vimeus.com/e/movie?tmdb=936075&view_key=5XHcd7JES5v0AYPGMsdPCScYHWXAbdoiieo8G7BGsxE"
+    },
+        proyectofindelmundo: {
+        name: "Proyecto Fin del Mundo",
+        video: "https://vimeos.net/embed-pgi4jykzm2a9.html"
+    },
+    avatar: {
+        name: "Avatar",
+        video: "https://vimeus.com/e/movie?tmdb=19995&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    avatarelcaminodelagua: {
+        name: "Avatar: El Camino del Agua",
+        video: "https://vimeus.com/e/movie?tmdb=76600&view_key=9lZ9H0whZSXmlqikD8bHrth_8ere1M9oTMT9w0gTp4U"
+    },
+    avatarfuegoyceniza: {
+        name: "Avatar: Fuego y Ceniza",
+        video: "https://vimeus.com/e/movie?tmdb=83533&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    topgun: {
+        name: "Top Gun: Pasión y Gloria",
+        video: "https://vimeus.com/e/movie?tmdb=744&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    top: {
+        name: "Top Gun: Maverick",
+        video: "https://vimeus.com/e/movie?tmdb=361743&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    f1: {
+        name: "F1",
+        video: "https://vimeus.com/e/movie?tmdb=911430&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    laeradehielo: {
+        name: "La Era de Hielo",
+        video: "https://vimeus.com/e/movie?tmdb=425&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    laeradehielo2: {
+        name: "La Era de Hielo 2",
+        video: "https://vimeus.com/e/movie?tmdb=950&view_key=3uVQPYnSn96mNfulLtCjEsADnao18nCIdaO--ZdEdek"
+    },
+    laeradehielo3: {
+        name: "La Era de Hielo 3",
+        video: "https://vimeos.net/embed-zvdiseyr8cmn.html"
+    },
+    laeradehielo4: {
+        name: "La Era de Hielo 4",
+        video: "https://vimeos.net/embed-o6bisgihhw0x.html"
+
+
+    },
+    laeradehielochoquedemundos: {
+        name: "La Era de Hielo: Choque de Mundos",
+        video: "https://hgcloud.to/e/12jkhi505b9x"
+
+    },
+    laeradehielolasaventurasdebuck: {
+        name: "La Era de Hielo: Las Aventuras de Buck",
+        video: "https://vimeus.com/e/movie?tmdb=774825&view_key=Uuuiue53iGjAK4_nS7dcSl0BzuC7hnYJFn33uGjTN3M"
+
+    },
+    goatlacabraquecambioeljuego: {
+        name: "GOAT: La Cabra que Cambio el Juego",
+        video: "https://vimeus.com/e/movie?tmdb=1297842&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
+
+    },
+    supermariobroslapelicula: {
+        name: "Super Mario Bros. La Pelicula",
+        video: "https://vimeus.com/e/movie?tmdb=502356&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
+
+    },
+    supermariogalaxylapelicula: {
+        name: "Super Mario Galaxy La Pelicula",
+        video: "https://vimeus.com/e/movie?tmdb=1226863&view_key=kBB4HjmN1JmTp26S5qB8hjMHUcROjaSDDEwAmxxVW5I"
+
+    },
+    hastaelultimohombre: {
+        name: "Hasta el Ultimo Hombre",
+        video: "https://vimeos.net/embed-5p9ilozea2ln.html"
+
+    },
+    lostiposmalos: {
+        name: "Los Tipos Malos",
+        video: "https://vimeus.com/e/movie?tmdb=629542&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    lostiposmalos2: {
+        name: "Los Tipos Malos 2",
+        video: "https://vimeus.com/e/movie?tmdb=1175942&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    elio: {
+        name: "Elio",
+        video: "https://vimeus.com/e/movie?tmdb=1022787&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    zoopocalipsis: {
+        name: "Zoopocalipsis",
+        video: "https://vimeus.com/e/movie?tmdb=1205229&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    chaman: {
+        name: "Chamán",
+        video: "https://vimeus.com/e/movie?tmdb=1339166&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    losojosdelmal: {
+        name: "Los Ojos del Mal",
+        video: "https://vimeus.com/e/movie?tmdb=10007&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    losojosdelmal2: {
+        name: "Los Ojos del Mal 2",
+        video: "https://vimeus.com/e/movie?tmdb=226140&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    losleones: {
+        name: "Los Leones",
+        video: "https://vimeus.com/e/movie?tmdb=666751&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    laprincesakaguyadelcosmos: {
+        name: "La Princesa Kaguya del Cosmos",
+        video: "https://vimeus.com/e/movie?tmdb=1575337&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    ochohombres: {
+        name: "Ocho Hombres",
+        video: "https://vimeus.com/e/movie?tmdb=13554&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    queduroeselamor: {
+        name: "¡Que Duro es el Amor!",
+        video: "https://vimeus.com/e/movie?tmdb=734265&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    ardemississippi: {
+        name: "Arde Mississipi",
+        video: "https://vimeus.com/e/movie?tmdb=1632&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    lasdoscarasdeenero: {
+        name: "Las Dos Caras de Enero",
+        video: "https://vimeus.com/e/movie?tmdb=192149&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    albert: {
+        name: "Albert",
+        video: "https://vimeus.com/e/movie?tmdb=429657&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    amarteduele: {
+        name: "Amar te Duele",
+        video: "https://vimeus.com/e/movie?tmdb=51822&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    tomyjerryyelmagodeoz: {
+        name: "Tom y Jerry y El mago de Oz",
+        video: "https://vimeus.com/e/movie?tmdb=72972&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    relentless: {
+        name: "Relentless",
+        video: "https://vimeus.com/e/movie?tmdb=1459276&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    thecaretaker: {
+        name: "The Caretaker",
+        video: "https://vimeus.com/e/movie?tmdb=1584478&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    pillion: {
+        name: "Pillion",
+        video: "https://vimeus.com/e/movie?tmdb=1287141&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    godssoldier: {
+        name: "God's Soldier",
+        video: "https://vimeus.com/e/movie?tmdb=1314440&view_key=I-l98E7LRCdWjJ4BVYMFmTVoe7esG_u1U5RFDd5YFug"
+
+    },
+    maquinadeguerra: {
+        name: "Máquina de Guerra",
+        video: "https://vimeos.net/embed-gu0ui9l378lj.html"
+
+    },
+    kungfupanda: {
+         name: "Kung Fu Panda",
+         video: "https://vimeus.com/e/movie?tmdb=9502&view_key=YXeDJZjDoj0LukP2ieJUWFJIP5kbkrI_0LqqSj3z2EQ"
+    },
+    kungfupanda2: {
+         name: "Kung Fu Panda 2",
+         video: "https://vimeus.com/e/movie?tmdb=49444&view_key=YXeDJZjDoj0LukP2ieJUWFJIP5kbkrI_0LqqSj3z2EQ"
+    },
+    kungfupanda3: {
+         name: "Kung Fu Panda 3",
+         video: "https://vimeus.com/e/movie?tmdb=140300&view_key=3JXTGx_Wq_nTnUCW7w_lfXgAgGbwi036BUDmEf1Av34"
+    },
+    kungfupanda4: {
+         name: "Kung Fu Panda 4",
+         video: "https://vimeus.com/e/movie?tmdb=1011985&view_key=3JXTGx_Wq_nTnUCW7w_lfXgAgGbwi036BUDmEf1Av34"
+    },
+    seducedbyastreager: {
+         name: "Seduced by a Streager",
+         video: "https://vimeus.com/e/movie?tmdb=461813&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    unaparejadispareja: {
+         name: "Una Pareja Dispareja",
+         video: "https://vimeus.com/e/movie?tmdb=8952&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    mash: {
+         name: "M*A*S*H",
+         video: "https://vimeos.net/embed-ig1086bz8ncw.html"
+    },
+    lovelacegargantaprofunda: {
+         name: "Lovelace: Garganta Profunda",
+         video: "https://vimeus.com/e/movie?tmdb=77805&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    juegodeasesinos: {
+         name: "Juego de Asesinos",
+         video: "https://vimeus.com/e/movie?tmdb=71677&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    loscroods: {
+         name: "Los Croods",
+         video: "https://vimeus.com/e/movie?tmdb=49519&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    loscroods2: {
+         name: "Los Croods 2",
+         video: "https://vimeus.com/e/movie?tmdb=529203&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    tigertanquedeguerra: {
+         name: "Tiger: Tanque de Guerra",
+         video: "https://vimeus.com/e/movie?tmdb=1252037&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    anaconda2025: {
+         name: "Anaconda (2025)",
+         video: "https://vimeus.com/e/movie?tmdb=1234731&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+    },
+    anaconda: {
          name: "Anaconda",
          video: "https://vimeus.com/e/movie?tmdb=9360&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
      },
-    anaconda2Enbuscadelaorquídeasangrienta: {
     anaconda2Enbuscadelaorquideasangrienta: {
          name: "Anaconda 2: En busca de la orquídea sangrienta",
          video: "https://vimeus.com/e/movie?tmdb=14863&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
      },
-@@ -337,21 +422,609 @@ <h1 id="title"></h1>
+    anaconda3laamenaza: {
+         name: "Anaconda 3: La Amenaza",
+         video: "https://vimeus.com/e/movie?tmdb=14863&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+     },
+    anaconda4rastrodesangre: {
+         name: "Anaconda 4: Rastro de Sangre",
+         video: "https://vimeus.com/e/movie?tmdb=19543&view_key=VwAySOD_3qjgw-EOh4-IZDlEK4EeQdmAD3N8YQ_pPII"
+     },
+    parquejurasico: {
+         name: "Parque Jurásico",
+         video: "https://vimeus.com/e/movie?tmdb=329&view_key=RVxqPBSesrcUZ7fR8DZ6FXri5QSPqVZbcWL0BVf4-3o"
+     },
+    parquejurasico2: {
+         name: "Parque Jurásico II",
+         video: "https://vimeus.com/e/movie?tmdb=330&view_key=RVxqPBSesrcUZ7fR8DZ6FXri5QSPqVZbcWL0BVf4-3o"
+     },
+    parquejurasico3: {
+         name: "Parque Jurásico III",
+         video: "https://vimeus.com/e/movie?tmdb=331&view_key=RVxqPBSesrcUZ7fR8DZ6FXri5QSPqVZbcWL0BVf4-3o"
+     },
+    jurassicworldmundojurasico: {
+         name: "Jurassic World: Mundo Jurásico",
+         video: "https://vimeos.net/embed-xabkwu952t15.html"
+     },
+    jurassicworldelreinocaido: {
+         name: "Jurassic World: El Reino Caído",
+         video: "https://vimeus.com/e/movie?tmdb=351286&view_key=AXfYsXN3DuWMn8AanAUUIBP2qX7GjCOgedk5dpVOa4E"
+     },
+    jurassicworlddominio: {
+         name: "Jurassic World: Dominio",
+         video: "https://vimeus.com/e/movie?tmdb=507086&view_key=AXfYsXN3DuWMn8AanAUUIBP2qX7GjCOgedk5dpVOa4E"
+     },
+    jurassicworldrenace: {
+         name: "Jurassic World: Renace",
+         video: "https://vimeus.com/e/movie?tmdb=1234821&view_key=AXfYsXN3DuWMn8AanAUUIBP2qX7GjCOgedk5dpVOa4E"
+     },
+    battleshipbatallanaval: {
+         name: "Battleship: Batalla Naval",
+         video: "https://vimeos.net/embed-pxysce6blf3b.html"
+     },
+    battleangellaultimaguerrera: {
+         name: "Battle Angel: La última guerrera",
+         video: "https://vimeus.com/e/movie?tmdb=399579&view_key=UKibv0BvjnHm6Fw6-MrgNx8yrDTJ1fIdoY1EMDUhVOE"
+     },
+    buscandoanemo: {
+         name: "Buscando a Nemo",
+         video: "https://vimeus.com/e/movie?tmdb=12&view_key=UKibv0BvjnHm6Fw6-MrgNx8yrDTJ1fIdoY1EMDUhVOE"
+     },
+    buscandoadory: {
+         name: "Buscando a Dory",
+         video: "https://vimeus.com/e/movie?tmdb=127380&view_key=UKibv0BvjnHm6Fw6-MrgNx8yrDTJ1fIdoY1EMDUhVOE"
+     },
+    piratasdelcaribelamaldiciondelaperlanegra: {
+         name: "Piratas del Caribe: La Maldición de la Perla Negra	",
+         video: "https://vimeos.net/embed-zrz58nx7jyrl.html"
+     },
+    piratasdelcaribe2elcofredelamuerte: {
+         name: "Piratas del Caribe 2: El Cofre de la Muerte",
+         video: "https://vimeus.com/e/movie?tmdb=58&view_key=UKibv0BvjnHm6Fw6-MrgNx8yrDTJ1fIdoY1EMDUhVOE"
+     },
+    piratasdelcaribe3enelfindelmundo: {
+         name: "Piratas del Caribe 3: En el Fin del Mundo",
+         video: "https://vimeus.com/e/movie?tmdb=285&view_key=UKibv0BvjnHm6Fw6-MrgNx8yrDTJ1fIdoY1EMDUhVOE"
+     },
+    piratasdelcaribe4navegandoaguasmisteriosas: {
+         name: "Piratas del Caribe 4: Navegando Aguas Misteriosas",
+         video: "https://vimeos.net/embed-htiqzsbh1xzx.html"
+     },
     piratasdelcaribe5lavenganzadesalazar: {
          name: "Piratas del Caribe 5: La Venganza de Salazar",
          video: "https://vimeos.net/embed-n6f6a6d5hq4q.html"
@@ -720,14 +1014,7 @@ const movies = {
 
 };
 
-if (!film) {
-    title.textContent = "⚠ Película no encontrada";
-}
 if (!film || !movies[film]) {
-    title.textContent = "⚠ Película no encontrada";
-}
-
-else {
     title.innerHTML = "❌ Película no encontrada";
     document.querySelector(".video-box").style.display = "none";
 } else {
@@ -741,3 +1028,4 @@ video.onload = () => {
 </script>
 
 </body>
+</html>
