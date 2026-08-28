@@ -1013,26 +1013,30 @@ if (!film || !movies[film]) {
         loader.style.display = "none";
     }, 3000);
 }
-window.open = function() { 
-    console.log("Popup publicitario bloqueado de forma segura.");
-    return null; 
-};
+ setTimeout(() => {
+        loader.style.display = "none";
+    }, 3000);
+}
 
-// 2. Escudo fantasma para absorber clics de anuncios
-const videoIframe = document.getElementById("video");
+// --- SOLUCIÓN DE CLONACIÓN AVANZADA ---
+const miIframe = document.getElementById("video");
 
-videoIframe.addEventListener("load", () => {
-    const escudoFantasma = document.createElement("div");
-    escudoFantasma.style.cssText = "position:absolute; top:0; left:0; width:100%; height:100%; z-index:9999; cursor:pointer; background:rgba(0,0,0,0.01); display:flex; align-items:center; justify-content:center;";
-    escudoFantasma.innerHTML = '<div style="font-size:50px; color:white; opacity:0.8; background:rgba(0,0,0,0.6); padding:15px 25px; border-radius:50%;">▶</div>';
-    
-    box.appendChild(escudoFantasma);
-    
-    escudoFantasma.addEventListener("click", () => {
-        const audioFalso = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
-        audioFalso.play().catch(() => {});
-        escudoFantasma.remove();
-    });
+miIframe.addEventListener("load", () => {
+    // Evitamos bucles infinitos de carga
+    if (miIframe.dataset.clonado === "true") return;
+
+    setTimeout(() => {
+        // Creamos un clon exacto del iframe original
+        const clon = miIframe.cloneNode(true);
+        clon.dataset.clonado = "true";
+        
+        // Le inyectamos restricciones de red extremas al clon justo antes de meterlo en pantalla
+        clon.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-presentation");
+        
+        // Intercambiamos el iframe original por el clon "limpio"
+        miIframe.parentNode.replaceChild(clon, miIframe);
+        console.log("Iframe clonado y blindado contra redirecciones.");
+    }, 1000); // Espera un segundo a que el buffer del video original valide la sesión
 });
 </script>
 
