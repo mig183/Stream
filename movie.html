@@ -80,7 +80,7 @@ iframe {
 
     <div class="video-box" id="box">
         <div class="loader" id="loader">⏳ Cargando...</div>
-        <iframe id="video" allowfullscreen></iframe>
+        <iframe id="video" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
     </div>
 </div>
 
@@ -1014,30 +1014,6 @@ if (!film || !movies[film]) {
         loader.style.display = "none";
     }, 3000);
 }
-    // 1. Bloquear ventanas emergentes automáticas (Popups)
-window.open = function() { 
-    console.log("Popup publicitario bloqueado de forma segura.");
-    return null; 
-};
-
-// 2. Interceptar la pérdida de foco (Anti-Redirección e Invisible Clicks)
-// Cuando el iframe intenta capturar el clic para abrir publicidad, el navegador cambia el foco.
-// Este script detecta ese movimiento y le devuelve el foco a tu página principal al instante.
-window.addEventListener('blur', function() {
-    if (document.activeElement === document.getElementById('video')) {
-        console.log("Se detectó intento de redirección o clic publicitario del iframe. Bloqueado.");
-        
-        // Devolvemos el foco a nuestra ventana principal inmediatamente
-        window.focus();
-        
-        // Creamos un pequeño truco de hackeo temporal para limpiar la selección forzada
-        const botonFalso = document.createElement('button');
-        document.body.appendChild(botonFalso);
-        botonFalso.focus();
-        botonFalso.remove();
-    }
-});
-
 </script>
 
 
