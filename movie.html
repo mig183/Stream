@@ -1017,27 +1017,6 @@ if (!film || !movies[film]) {
         loader.style.display = "none";
     }, 3000);
 }
-
-// --- SOLUCIÓN DE CLONACIÓN AVANZADA ---
-const miIframe = document.getElementById("video");
-
-miIframe.addEventListener("load", () => {
-    // Evitamos bucles infinitos de carga
-    if (miIframe.dataset.clonado === "true") return;
-
-    setTimeout(() => {
-        // Creamos un clon exacto del iframe original
-        const clon = miIframe.cloneNode(true);
-        clon.dataset.clonado = "true";
-        
-        // Le inyectamos restricciones de red extremas al clon justo antes de meterlo en pantalla
-        clon.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-presentation");
-        
-        // Intercambiamos el iframe original por el clon "limpio"
-        miIframe.parentNode.replaceChild(clon, miIframe);
-        console.log("Iframe clonado y blindado contra redirecciones.");
-    }, 1000); // Espera un segundo a que el buffer del video original valide la sesión
-});
 </script>
 
 
