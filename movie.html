@@ -1016,5 +1016,90 @@ if (!film || !movies[film]) {
 }
 </script>
 
+    <script>
+(() => {
+    "use strict";
+
+
+    const blockedDomains = [
+        "https://cd.connatix.com/identity.js?aid=SDtULpKyEeWwxnBWgb9%2BiQ",
+        "https://followerstared.com/0e/d5/91/0ed591400877d316744c63",
+        "https://openfpcdn.io/botd/v1",
+        "adservice.google.com",
+        "https://prd.jwpltx.com",
+        "https://tracylocalschool.com/log/log_js_error",
+        "propellerads.com",
+        "popads.net",
+        "https://static.ads-twitter.com/uwt.js",
+        "https://imasdk.googleapis.com/js/sdkloader/ima3.js",
+        "https://vimeos.net/player/jw8/vast.js"
+    ];
+
+    function isBlocked(url) {
+        try {
+            const host = new URL(url, location.href).hostname.toLowerCase();
+
+            return blockedDomains.some(domain =>
+                host === domain || host.endsWith("." + domain)
+            );
+        } catch {
+            return false;
+        }
+    }
+    
+    document.addEventListener("click", function (event) {
+
+        const link = event.target.closest("a");
+
+        if (!link || !link.href)
+            return;
+
+        if (isBlocked(link.href)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            console.log("[StreamUmber] Enlace publicitario bloqueado");
+        }
+
+    }, true);
+
+
+    const originalOpen = window.open;
+
+    window.open = function(url, target, features) {
+
+        if (url && isBlocked(url)) {
+            console.log("[StreamUmber] Popup bloqueado:", url);
+            return null;
+        }
+
+        return originalOpen.call(
+            window,
+            url,
+            target,
+            features
+        );
+    };
+
+    document.addEventListener("click", function (event) {
+
+        const link = event.target.closest("a");
+
+        if (!link)
+            return;
+
+        if (link.target === "_blank" && isBlocked(link.href)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+
+    }, true);
+
+
+    console.log("[StreamUmber] Protección anti-popup activa");
+
+})();
+</script>
+
 </body>
 </html>
