@@ -80,7 +80,7 @@ iframe {
 
     <div class="video-box" id="box">
         <div class="loader" id="loader">⏳ Cargando...</div>
-        <iframe id="video" allowfullscreen></iframe>
+        <iframe id="video" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
     </div>
 </div>
 
@@ -1013,53 +1013,6 @@ if (!film || !movies[film]) {
         loader.style.display = "none";
     }, 3000);
 }
-(function() {
-    // 1. Proteger el entorno local contra modificaciones de scripts externos
-    const originalOpen = window.open;
-    const sBlock = {
-        writable: false,
-        configurable: false,
-        value: function() {
-            console.log("[BraveShield-Mock] Intento de ventana emergente neutralizado.");
-            return { focus: function() {}, blur: function() {}, close: function() {} };
-        }
-    };
-    Object.defineProperty(window, 'open', sBlock);
-
-    // 2. Interceptor de eventos nativos para clicks falsificados en subdocumentos
-    document.addEventListener('click', function(e) {
-        const targetFrame = document.getElementById("video");
-        if (document.activeElement === targetFrame) {
-            // Mitigación inmediata: desviar el foco antes de la resolución del ciclo de eventos
-            window.focus();
-            const voidInput = document.createElement('input');
-            voidInput.style.cssText = 'position:absolute;opacity:0;';
-            document.body.appendChild(voidInput);
-            voidInput.focus();
-            voidInput.remove();
-        }
-    }, { capture: true, passive: true });
-
-    // 3. Monitor de mutación asíncrona sobre el contenedor del reproductor
-    const targetBox = document.getElementById("box");
-    if (targetBox) {
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                mutation.addedNodes.forEach((node) => {
-                    // Si el iframe inyecta dinámicamente capas overlays de redirección (clics invisibles)
-                    if (node.nodeType === 1 && (node.style.zIndex > 10 || node.style.position === 'absolute')) {
-                        if (node.id !== 'loader' && node.id !== 'video') {
-                            node.remove();
-                            console.log("[BraveShield-Cosmetic] Capa publicitaria oculta destruida.");
-                        }
-                    }
-                });
-            });
-        });
-        observer.observe(targetBox, { childList: true, subtree: true });
-    }
-})();
-
 </script>
 
 
