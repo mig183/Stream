@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Streamumber</title>
+   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; frame-src 'self' https://vimeus.com https://vimeos.net https://hgcloud.to; script-src 'self' 'unsafe-inline' https://vimeus.com https://vimeos.net https://hgcloud.to;">
 <link rel="icon" href="favicon.png">
 
 <style>
@@ -80,7 +81,7 @@ iframe {
 
     <div class="video-box" id="box">
         <div class="loader" id="loader">⏳ Cargando...</div>
-        <iframe id="video" allowfullscreen></iframe>
+        <iframe id="video" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
     </div>
 </div>
 
@@ -1016,97 +1017,6 @@ if (!film || !movies[film]) {
 }
 </script>
 
-    <script>
-(() => {
-    "use strict";
-
-
-    const blockedDomains = [
-        "https://cd.connatix.com/identity.js?aid=SDtULpKyEeWwxnBWgb9%2BiQ",
-        "https://followerstared.com/0e/d5/91/0ed591400877d316744c63",
-        "https://openfpcdn.io/botd/v1",
-        "https://mks98.com",
-        "https://prd.jwpltx.com",
-        "https://tracylocalschool.com/log/log_js_error",
-        "http://srv.dt.pomxd.com",
-        "https://arkrecode14.ero-labs.art/lp/en/index.html?sd1=%7BdynamicIMG%7D&sd2=33280&sd3=312922&traceId=pop20260828.6a91f372b10d59.05043858&f=juicy",
-        "https://static.ads-twitter.com/uwt.js",
-        "https://imasdk.googleapis.com/js/sdkloader/ima3.js",
-        "https://vimeos.net/player/jw8/vast.js" 
-        "https://best.aliexpress.com/"
-        "https://hai8g.com"
-        "https://stake.com.co/bienvenida?utm_source=Propeller&utm_medium=cpc&utm_campaign=sc_Propeller_Columbia_display&utm_term=sc_Propeller_Columbia_Popunder_Desktop_ftd_new_stakebrand_display_wc_17072026&utm_content=cpc"
-        "https://da8vksfp3sis73b5c750.deskshieldx.it.com/xm/xm8/?scroll=17879fba1bef006a7e8cf508e80b0d262977b52029&t1=0.144850&t2=19089331&t3=838149&t4=2456901&t5=3648587&t6=Movies&t7=Telmex%20Colombia&key=5ac05a0588af43de8b4136e3eae7f00c&clickid=da8vksfp3sis73b5c750&trk=scorom.com&fdd=63afaf86e3fb41bbb88a01b33bbb2909&vpb=BJ2B-kKCNNHUmLBktybf-L2uYToTeJahT9uE3Wz2N8v-M2f5yI2zqhKQj_GkaAKe5SJYDQOz-NF5owSL8V26X9M&language=es-ES&dm=1#"
-        "https://mks98.com"
-        "https://mks98.com"
-           
-    ];
-
-    function isBlocked(url) {
-        try {
-            const host = new URL(url, location.href).hostname.toLowerCase();
-
-            return blockedDomains.some(domain =>
-                host === domain || host.endsWith("." + domain)
-            );
-        } catch {
-            return false;
-        }
-    }
-    
-    document.addEventListener("click", function (event) {
-
-        const link = event.target.closest("a");
-
-        if (!link || !link.href)
-            return;
-
-        if (isBlocked(link.href)) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-
-            console.log("[StreamUmber] Enlace publicitario bloqueado");
-        }
-
-    }, true);
-
-
-    const originalOpen = window.open;
-
-    window.open = function(url, target, features) {
-
-        if (url && isBlocked(url)) {
-            console.log("[StreamUmber] Popup bloqueado:", url);
-            return null;
-        }
-
-        return originalOpen.call(
-            window,
-            url,
-            target,
-            features
-        );
-    };
-
-    document.addEventListener("click", function (event) {
-
-        const link = event.target.closest("a");
-
-        if (!link)
-            return;
-
-        if (link.target === "_blank" && isBlocked(link.href)) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-
-    }, true);
-
-
-    console.log("[StreamUmber] Protección anti-popup activa");
-
-})();
-</script>
 
 </body>
 </html>
