@@ -80,7 +80,7 @@ iframe {
 
     <div class="video-box" id="box">
         <div class="loader" id="loader">⏳ Cargando...</div>
-        <iframe id="video" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
+        <iframe id="video" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -1014,6 +1014,27 @@ if (!film || !movies[film]) {
         loader.style.display = "none";
     }, 3000);
 }
+    // 1. Sobrescribir la función que abre ventanas emergentes
+window.open = function() { 
+    console.log("Popup publicitario bloqueado silenciosamente.");
+    return {
+        focus: function() {},
+        blur: function() {},
+        close: function() {}
+    }; // Devuelve un objeto falso para que el script del anuncio no tire error y se detenga
+};
+
+// 2. Interceptor dinámico de clics fraudulentos
+document.addEventListener('click', function(e) {
+    // Si el clic proviene de un elemento que intenta abrir publicidad de terceros
+    if (document.activeElement === document.getElementById('video')) {
+        // Quitamos el foco inmediatamente del reproductor para romper el enlace del anuncio
+        setTimeout(() => {
+            window.focus();
+        }, 50);
+    }
+}, true); // El 'true' activa la fase de captura, atrapando el clic antes de que el iframe lo procese
+
 </script>
 
 
