@@ -1,0 +1,105 @@
+@import "../../mixins.scss";
+
+.videoPopup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999; /* 🚀 CAPA SUPREMA: Lo posiciona por encima de toda la web para capturar el scroll */
+    transition: all 0.25s ease;
+
+    /* Capa de fondo oscura que difumina la web al abrir el reproductor */
+    .opacityLayer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85); 
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: opacity 0.25s ease;
+    }
+
+    /* 🎬 LA CAJA PRINCIPAL OSCURA Y PRECONFIGURADA */
+    .videoPlayer {
+        position: relative;
+        width: 800px;
+        max-width: 90%;
+        aspect-ratio: 16 / 9;
+        background-color: rgba(20, 20, 20, 0.95); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        
+        /* 🔴 Tu borde e iluminación neón roja de acción */
+        border: 2px solid #E50914; 
+        box-shadow: 0 0 25px rgba(229, 9, 20, 0.5);
+        border-radius: 12px;
+        transform: scale(0.8);
+        transition: transform 0.25s ease;
+        z-index: 10000;
+        pointer-events: auto; /* 🛡️ Fuerza al mouse a interactuar directamente aquí */
+
+        .closeBtn {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            color: #999; /* El color gris plata limpio para cerrar */
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: color 0.2s ease;
+            &:hover {
+                color: #E50914; /* Alumbra a rojo al pasar el cursor */
+            }
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: none;
+            pointer-events: auto; /* Permite controlar el volumen y scroll dentro del iframe */
+        }
+
+        /* 🛡️ EL ESCUDO INTELIGENTE: Bloquea SOLO el recuadro falso de "Servidores 1" */
+        &::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 145px;  
+            height: 45px;
+            background: transparent; 
+            z-index: 10001;            
+            pointer-events: auto; 
+            cursor: default;
+        }
+    }
+
+    /* Clase activa que inyecta React al presionar "Ver Ahora" */
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        .videoPlayer {
+            transform: scale(1);
+        }
+    }
+}
+
+@keyframes mobileMenu {
+    0% {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
