@@ -1,0 +1,145 @@
+@import "../../../mixins.scss";
+
+.heroBanner {
+    width: 100%;
+    height: 450px;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+    @include md {
+        height: 700px;
+    }
+
+    .backdrop-img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        overflow: hidden;
+        
+        .lazy-load-image-background {
+            width: 100%;
+            height: 100%;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+    }
+
+    .opacity-layer {
+        width: 100%;
+        height: 250px;
+        /* 🖤 Modificado para fundirse a negro absoluto en lugar del azul viejo */
+        background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 0%,
+            #000000 79.17%
+        );
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .heroBannerContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%; /* Asegura estabilidad en móviles */
+
+        .title {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            @include md {
+                margin-bottom: 0;
+                font-size: 90px;
+            }
+        }
+
+        .subTitle {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            @include md {
+                font-size: 24px;
+            }
+        }
+
+        .searchInput {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            
+            input {
+                width: calc(100% - 100px);
+                height: 50px;
+                /* 🔍 Fondo oscuro minimalista translúcido */
+                background-color: rgba(0, 0, 0, 0.4); 
+                outline: 0;
+                border: 1px solid #262626;
+                border-radius: 30px 0 0 30px;
+                padding: 0 15px;
+                font-size: 14px;
+                color: white;
+                transition: all 0.3s ease;
+
+                /* 🔥 EFECTO NEÓN: Al hacer clic o escribir, las orillas alumbran rojo */
+                &:focus {
+                    border-color: #E50914;
+                    box-shadow: -4px 0 15px rgba(229, 9, 20, 0.7), 
+                                0 -4px 15px rgba(229, 9, 20, 0.4), 
+                                0 4px 15px rgba(229, 9, 20, 0.4);
+                }
+
+                &::placeholder {
+                    color: #bbb;
+                }
+
+                @include md {
+                    width: calc(100% - 150px);
+                    height: 60px;
+                    font-size: 20px;
+                    padding: 0 30px;
+                }
+            }
+
+            button {
+                width: 100px;
+                height: 50px;
+                /* 🔴 Botón de buscar en color rojo fuego sólido */
+                background: #E50914; 
+                color: white;
+                outline: 0;
+                border: 1px solid #E50914;
+                border-radius: 0 30px 30px 0;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: #B20710;
+                    border-color: #B20710;
+                    box-shadow: 4px 0 15px rgba(229, 9, 20, 0.7);
+                }
+
+                @include md {
+                    width: 150px;
+                    height: 60px;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
