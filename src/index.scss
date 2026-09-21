@@ -1,0 +1,75 @@
+/* 🎨 CONFIGURACIÓN DE RAÍZ COMPLETA Y REPARADA - STREAMUMBER */
+:root {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 500;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    /* 🖤 variables base de color fijadas en negro absoluto */
+    --black: #000000;          
+    --black2: #141414;         /* Color fondo estilo Netflix para el Switch */
+    --black3: #0a0a0a;         
+    --black-lighter: #262626;  
+    --black-light: #1c1c1c;    
+    
+    --pink: #E50914;           /* Tu ROJO de acción principal */
+    --orange: #B20710;         /* Rojo oscuro para hovers y detalles */
+    
+    /* 🔴 LA SOLUCIÓN: Degradado lineal en rojo fuego limpio. 
+       Esto arregla el selector Day/Week para que brille en rojo sin parches blancos */
+    --gradient: linear-gradient(98.37deg, #B20710 0.99%, #E50914 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--black);
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* 💀 CARGADORES ANIMADOS ADAPTADOS AL NUEVO FONDO OSCURO */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: #1c1c1c; 
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+            90deg,
+            rgba(#262626, 0) 0,
+            rgba(#262626, 0.3) 20%,
+            rgba(#262626, 0.6) 60%,
+            rgba(#262626, 0)
+        );
+        animation: shimmer 2s infinite;
+        content: "";
+    }
+
+    @keyframes shimmer {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+}
